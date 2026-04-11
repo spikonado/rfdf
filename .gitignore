@@ -3,11 +3,37 @@ build
 install
 log
 
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# macOS-specific files
+.DS_Store
+
 # Nix
 .buildenv
 .direnv
 .envrc
 
+# Output
+.astro/
+.output
+.vercel
+dist/
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
 .cache
 .vscode
 compile_commands.json
+node_modules/
