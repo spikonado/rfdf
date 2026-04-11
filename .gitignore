@@ -1,0 +1,13 @@
+# Colcon
+build
+install
+log
+
+# Nix
+.buildenv
+.direnv
+.envrc
+
+.cache
+.vscode
+compile_commands.json
