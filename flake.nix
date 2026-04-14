@@ -22,6 +22,8 @@
         rosPkgs = pkgs.rosPackages.${rosDistro};
 
         devTools = with pkgs; [
+          cargo
+          colcon
           commitlint
           bun
           gcc
@@ -30,26 +32,30 @@
           git-lfs
           prek
           prettier
+          python3Packages.colcon-cargo
+          python3Packages.colcon-ros-cargo
+          rustc
+          rustfmt
         ];
 
         # Define the ROS environment with all necessary dependencies
         rosEnv = rosPkgs.buildEnv {
-          wrapPrograms = false;
-          paths =
-            with pkgs;
-            with rosPkgs;
-            [
-              colcon
-              ros-core
-              ament-lint-common
+          paths = with rosPkgs; [
+            ros-core
+            ament-lint-common
 
-              # Work around https://github.com/lopsided98/nix-ros-overlay/pull/624
-              ament-cmake-core
-              python-cmake-module
+            # Work around https://github.com/lopsided98/nix-ros-overlay/pull/624
+            ament-cmake-core
+            python-cmake-module
 
-              # Dependencies from package.xml files
-              ament-cmake
-            ];
+            # Dependencies from package.xml files
+            rosidl-default-generators
+            rosidl-default-runtime
+
+            # Needed for rclrs, https://github.com/ros2-rust/ros2_rust/issues/557
+            example-interfaces
+            test-msgs
+          ];
         };
       in
       {

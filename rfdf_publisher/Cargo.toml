@@ -1,0 +1,15 @@
+[package]
+name = "rfdf_publisher"
+version = "0.0.0"
+authors = ["Aarav Gupta <aarav@spikonado.com>"]
+edition = "2021"
+
+[dependencies]
+anyhow = { version = "1.0.102", features = ["backtrace"] }
+rclrs = "0.7.0"
+rfdf_interfaces = "0.0.0"
+rosidl_runtime_rs = "0.6.0"
+
+[[bin]]
+name = "rfdf_publisher"
+path = "src/rfdf_publisher.rs"
