@@ -1,0 +1,15 @@
+%YAML 1.2
+---
+launch:
+  - arg:
+      name: "rfdf_file"
+      default: "$(find-pkg-share rfdf_example_ros2)/description/rfdf.kdl"
+
+  - node:
+      pkg: "rfdf_publisher"
+      exec: "rfdf_publisher"
+      name: "rfdf_publisher"
+      param:
+        - name: "rfdf_file"
+          type: "str"
+          value: "$(var rfdf_file)"

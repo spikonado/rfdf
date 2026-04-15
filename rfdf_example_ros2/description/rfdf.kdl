@@ -1,0 +1,17 @@
+movement {
+    ros2_topic "/cmd_vel"
+
+    linear {
+        x #true {
+            max_velocity 1.0
+            min_velocity -1.0
+        }
+    }
+
+    angular {
+        z #true {
+            max_velocity 1.0
+            min_velocity -1.0
+        }
+    }
+}
