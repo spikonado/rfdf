@@ -21,9 +21,14 @@ jobs:
           extra_nix_config: |
             accept-flake-config = true
 
+      - uses: cachix/cachix-action@v17
+        with:
+          name: spikonado
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
       - name: Build and Cache Shell Environment
         run: |
-          nix build --profile rfdf-shell -c true
+          nix develop --profile rfdf-shell -c true
           cachix push spikonado rfdf-shell
 
       - name: Run prek
