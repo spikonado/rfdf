@@ -1,0 +1,108 @@
+# To use:
+#
+#     prek run -a --hook-stage manual
+#
+# Or:
+#
+#     prek install --prepare-hooks -f  # (runs every time you commit in git)
+#
+# To update this file:
+#
+#     prek autoupdate
+#
+# See https://prek.j178.dev/
+
+default_stages:
+  - manual
+  - pre-commit
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-yaml
+      - id: check-xml
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v22.1.1
+    hooks:
+      - id: clang-format
+        args: ['-fallback-style=none', '-i']
+        exclude_types: [javascript, json]
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.2
+    hooks:
+      - id: codespell
+        exclude: (^|/)bun\.lock$
+        exclude_types: [svg]
+
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.37.0
+    hooks:
+      - id: check-github-workflows
+        args: ['--verbose']
+      - id: check-github-actions
+        args: ['--verbose']
+      - id: check-dependabot
+        args: ['--verbose']
+
+  - repo: local
+    hooks:
+      - id: commitlint
+        name: commitlint
+        language: system
+        entry: commitlint --edit
+        stages: [commit-msg]
+
+      - id: prettier-check
+        name: prettier
+        language: system
+        entry: prettier --check .
+        pass_filenames: false
+        stages: [pre-commit]
+
+      - id: prettier-write
+        name: prettier
+        language: system
+        entry: prettier --write .
+        pass_filenames: false
+        stages: [manual]
+
+  - repo: local
+    hooks:
+      - id: ament_copyright
+        name: ament_copyright
+        entry: ament_copyright
+        language: system
+      - id: ament_cppcheck
+        name: ament_cppcheck
+        entry: env AMENT_CPPCHECK_ALLOW_SLOW_VERSIONS=1 ament_cppcheck
+        language: system
+        files: \.(c|cc|cpp|cxx|h|hh|hpp|hxx)$
+      - id: ament_cpplint
+        name: ament_cpplint
+        entry: ament_cpplint
+        language: system
+        files: \.(c|cc|cpp|cxx|h|hh|hpp|hxx)$
+      - id: ament_lint_cmake
+        name: ament_lint_cmake
+        entry: ament_lint_cmake
+        language: system
+        files: CMakeLists\.txt$
+      - id: ament_xmllint
+        name: ament_xmllint
+        entry: ament_xmllint
+        language: system
+        # files: \.(sdf|urdf|xacro|xml)$
+        # ament_xmllint fails to properly parse package.xml on Nix
+        files: \.(sdf|urdf|xacro)$

@@ -1,0 +1,39 @@
+name: Build & Test Packages - APT - Ubuntu
+
+on:
+  merge_group:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build_test_packages:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - ros_distro: humble
+            ubuntu: jammy
+          - ros_distro: jazzy
+            ubuntu: noble
+          - ros_distro: kilted
+            ubuntu: noble
+          - ros_distro: rolling
+            ubuntu: noble
+    container:
+      image: ubuntu:${{ matrix.ubuntu }}
+    steps:
+      - uses: actions/checkout@v6.0.2
+
+      - uses: ros-tooling/setup-ros@v0.7
+        with:
+          required-ros-distributions: ${{ matrix.ros_distro }}
+
+      - uses: ros-tooling/action-ros-ci@0.4.5
+        with:
+          target-ros2-distro: ${{ matrix.ros_distro }}

@@ -1,0 +1,40 @@
+name: Prek
+
+on:
+  merge_group:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  run_prek:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.2
+
+      - uses: cachix/install-nix-action@v31.10.1
+        with:
+          extra_nix_config: |
+            accept-flake-config = true
+
+      - uses: cachix/cachix-action@v17
+        with:
+          name: spikonado
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+      - name: Build and Cache Shell Environment
+        run: |
+          nix develop --profile rfdf-shell -c true
+          cachix push spikonado rfdf-shell
+
+      - name: Run prek
+        shell: 'nix develop --profile rfdf-shell -c bash -e {0}'
+        run: prek run -a
+
+      - name: Run fmt
+        shell: 'nix develop --profile rfdf-shell -c bash -e {0}'
+        run: nix fmt
