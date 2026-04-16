@@ -17,7 +17,12 @@
           overlays = [ nix-ros-overlay.overlays.default ];
         };
 
-        rosDistro = "kilted";
+        # Little hack for running CI on multiple distros
+        rosDistro =
+          let
+            envRosDistro = builtins.getEnv "ROS_DISTRO";
+          in
+          if envRosDistro != "" then envRosDistro else "rolling";
 
         rosPkgs = pkgs.rosPackages.${rosDistro};
 
