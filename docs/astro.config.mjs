@@ -14,8 +14,15 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'Specification',
-					// Starlight 0.39+ requires autogenerate to live inside `items`.
-					items: [{ autogenerate: { directory: 'specification' } }]
+					items: [
+						{ autogenerate: { directory: 'specification' } },
+						{
+							label: 'Example ROS 2 package',
+							link: 'https://github.com/spikonado/rfdf/tree/main/rfdf_example_ros2',
+							badge: { text: 'GitHub', variant: 'note' },
+							attrs: { target: '_blank', rel: 'noopener noreferrer' }
+						}
+					]
 				}
 			]
 		})
