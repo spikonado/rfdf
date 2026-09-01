@@ -11,16 +11,6 @@
 		{
 			"matchDepTypes": ["action", "uses-with"],
 			"automerge": true
-		},
-		{
-			"description": "Starlight 0.41+ requires Astro 7; bump them together so isolated PRs cannot install.",
-			"matchPackageNames": ["astro", "@astrojs/starlight", "@astrojs/check"],
-			"groupName": "astro docs"
-		},
-		{
-			"description": "@astrojs/check still needs TypeScript's JS language-service API, which TypeScript 7.0 does not ship.",
-			"matchPackageNames": ["typescript"],
-			"allowedVersions": "<7"
 		}
 	],
 	"lockFileMaintenance": {
