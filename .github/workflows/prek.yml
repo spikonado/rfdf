@@ -13,6 +13,7 @@ permissions:
 jobs:
   run_prek:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v7.0.1
 
