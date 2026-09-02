@@ -13,9 +13,9 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/spikonado/rfdf' }],
 			sidebar: [
 				{
-					label: 'Using RFDF',
+					label: 'Specification',
 					items: [
-						{ slug: 'guides/ros2' },
+						{ autogenerate: { directory: 'specification' } },
 						{
 							label: 'Example ROS 2 package',
 							link: 'https://github.com/spikonado/rfdf/tree/main/rfdf_example_ros2',
@@ -23,10 +23,6 @@ export default defineConfig({
 							attrs: { target: '_blank', rel: 'noopener noreferrer' }
 						}
 					]
-				},
-				{
-					label: 'Specification',
-					items: [{ autogenerate: { directory: 'specification' } }]
 				}
 			]
 		})
