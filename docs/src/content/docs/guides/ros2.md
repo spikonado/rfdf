@@ -38,6 +38,6 @@ The publisher parameter is `rfdf_file` (a filesystem path), not `description`.
 
 ## For app developers
 
-Subscribe to `/robot_features` (`rfdf_interfaces/msg/Rfdf`). The `rfdf` field is the KDL document as a string. Use a KDL parser in the app to decide whether the robot has the features you need.
+Subscribe to `robot_features` (`rfdf_interfaces/msg/Rfdf`). The publisher uses that relative name, so the full topic is `/robot_features` only when the node is in the root namespace. If you launch the publisher under another namespace, subscribe to the namespaced topic instead. The `rfdf` field is the KDL document as a string. Use a KDL parser in the app to decide whether the robot has the features you need.
 
 Transient-local QoS is required to receive the last published document if you subscribe after the publisher has started.
