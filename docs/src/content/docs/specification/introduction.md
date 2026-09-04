@@ -23,7 +23,7 @@ See [Using RFDF with ROS 2](/guides/ros2/) and the [example package](https://git
 
 ### For Robot App Developers
 
-Subscribe to that same `robot_features` topic and use one of our parsers in your apps's code to read the document.
+Subscribe to that same `robot_features` topic and use one of our parsers in your app's code to read the document.
 
 ## Per-Section Documentation
 
