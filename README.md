@@ -15,9 +15,9 @@ Currently only ROS 2 is supported.
 
 Example ROS 2 package: [rfdf_example_ros2](./rfdf_example_ros2)
 
-- Create a `rfdf.kdl` file and pass its path to the `rfdf_publisher` node through its `description` parameter.
-- The description will be automatically published on the `/robot_features` topic.
+- Create a `rfdf.kdl` file and pass its path to the `rfdf_publisher` node through its `rfdf_file` parameter.
+- The description will be automatically published on the `robot_features` topic (relative to the publisher node's namespace).
 
 ### For Robot App Developers
 
-Subscribe to the `/robot_features` topic and use one of our parsers in your apps's code to read the document.
+Subscribe to that same `robot_features` topic and use one of our parsers in your app's code to read the document.
