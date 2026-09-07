@@ -16,14 +16,14 @@ Currently only ROS 2 is supported.
 
 ### For Robot Developers
 
-Example ROS 2 package: [rfdf_example_ros2](https://github.com/spikonado/rfdf/blob/main/rfdf_example_ros2)
+See [Using RFDF with ROS 2](/guides/ros2/) and the [example package](https://github.com/spikonado/rfdf/tree/main/rfdf_example_ros2).
 
-- Create a `rfdf.kdl` file and pass its path to the `rfdf_publisher` node through its `description` parameter.
-- The description will be automatically published on the `/robot_features` topic.
+- Create a `rfdf.kdl` file and pass its path to the `rfdf_publisher` node through its `rfdf_file` parameter.
+- The description will be automatically published on `robot_features` relative to the publisher node's namespace (`/robot_features` unless you launch the node under another namespace).
 
 ### For Robot App Developers
 
-Subscribe to the `/robot_features` topic and use one of our parsers in your apps's code to read the document.
+Subscribe to that fully-qualified topic (typically `/robot_features`) and use one of our parsers in your app's code to read the document. A relative subscription resolves under the subscriber's namespace. See [Using RFDF with ROS 2](/guides/ros2/).
 
 ## Per-Section Documentation
 
