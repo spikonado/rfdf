@@ -53,6 +53,8 @@ repos:
         args: ['--verbose']
       - id: check-github-actions
         args: ['--verbose']
+      - id: check-github-workflows-require-timeout
+        args: ['--verbose']
       - id: check-dependabot
         args: ['--verbose']
 
