@@ -13,6 +13,7 @@ permissions:
 jobs:
   build_test_packages:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     strategy:
       fail-fast: false
       matrix:
