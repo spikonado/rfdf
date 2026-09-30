@@ -11,6 +11,11 @@
 		{
 			"matchDepTypes": ["action", "uses-with"],
 			"automerge": true
+		},
+		{
+			"description": "rclrs 0.7.0 still depends on rosidl_runtime_rs ^0.6. 0.7.0 changes the sequence ABI, so a mixed graph would duplicate the crate.",
+			"matchPackageNames": ["rosidl_runtime_rs"],
+			"allowedVersions": "<0.7"
 		}
 	],
 	"lockFileMaintenance": {
