@@ -11,6 +11,11 @@
 		{
 			"matchDepTypes": ["action", "uses-with"],
 			"automerge": true
+		},
+		{
+			"description": "@astrojs/check still needs TypeScript's JS language-service API, which TypeScript 7.0 does not ship.",
+			"matchPackageNames": ["typescript"],
+			"allowedVersions": "<7"
 		}
 	],
 	"lockFileMaintenance": {
