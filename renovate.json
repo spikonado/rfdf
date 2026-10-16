@@ -11,6 +11,11 @@
 		{
 			"matchDepTypes": ["action", "uses-with"],
 			"automerge": true
+		},
+		{
+			"description": "Starlight 0.41+ requires Astro 7; bump them together so isolated PRs cannot install.",
+			"matchPackageNames": ["astro", "@astrojs/starlight", "@astrojs/check"],
+			"groupName": "astro docs"
 		}
 	],
 	"lockFileMaintenance": {
