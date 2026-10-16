@@ -53,7 +53,7 @@ repos:
         args: ['--verbose']
       - id: check-github-actions
         args: ['--verbose']
-      - id: check-dependabot
+      - id: check-renovate
         args: ['--verbose']
 
   - repo: local
