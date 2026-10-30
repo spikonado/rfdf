@@ -1,12 +1,12 @@
-use anyhow::Result;
+use anyhow::{Context as _, Result};
 use rclrs::{
     Context, CreateBasicExecutor, Executor, IntoPrimitiveOptions, MandatoryParameter, Node,
-    Publisher, RclrsError, RclrsErrorFilter, SpinOptions,
+    Publisher, RclrsErrorFilter, SpinOptions,
 };
 use rfdf_interfaces::msg::Rfdf as RfdfMsg;
 use std::sync::Arc;
 
-fn main() -> Result<(), RclrsError> {
+fn main() -> Result<()> {
     let context: Context = Context::default_from_env()?;
     let mut executor: Executor = context.create_basic_executor();
 
@@ -20,17 +20,14 @@ fn main() -> Result<(), RclrsError> {
 
     let rfdf_file: Arc<str> = rfdf_file_parameter.get();
     let message: RfdfMsg = RfdfMsg {
-        rfdf: std::fs::read_to_string(rfdf_file.as_ref()).unwrap_or_else(|e| {
-            panic!(
-                "Failed to read rfdf_file at path: '{}'. Due to error: '{}'",
-                rfdf_file.as_ref(),
-                e
-            )
-        }),
+        rfdf: std::fs::read_to_string(rfdf_file.as_ref()).with_context(|| {
+            format!("Failed to read rfdf_file at path: '{}'", rfdf_file.as_ref())
+        })?,
         ..Default::default()
     };
 
     publisher.publish(&message)?;
 
-    executor.spin(SpinOptions::default()).first_error()
+    executor.spin(SpinOptions::default()).first_error()?;
+    Ok(())
 }
