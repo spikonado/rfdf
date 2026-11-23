@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
 
-      - uses: cachix/install-nix-action@31.11.3
+      - uses: cachix/install-nix-action@v32.0.0
         with:
           extra_nix_config: |
             accept-flake-config = true
